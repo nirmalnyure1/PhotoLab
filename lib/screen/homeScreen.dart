@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:socialmediaui/data/data.dart';
+import 'package:socialmediaui/widgets/post.dart';
 import 'package:socialmediaui/widgets/userfollowers.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -10,15 +12,23 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   late TabController _tabController;
+  late PageController _pageController;
+  var currentPagevalue = 0.0;
 
   @override
   void initState() {
     super.initState();
     _tabController = TabController(length: 2, vsync: this);
+    _pageController = PageController(initialPage: 0, viewportFraction: 0.8);
   }
 
   @override
   Widget build(BuildContext context) {
+    // _pageController.addListener(() {
+    //   setState(() {
+    //     currentPagevalue = _pageController.page!;
+    //   });
+    // });
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
@@ -77,7 +87,14 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
 
         body: TabBarView(controller: _tabController, children: <Widget>[
           ListView(
-            children: [UserFollowers()],
+            children: [
+              UserFollowers(),
+              SizedBox(height: 20.0),
+              PostField(
+                  posts: posts,
+                  pageController: _pageController,
+                  title: 'Posts'),
+            ],
           ),
           Center(
             child: Text("It's rainy here"),

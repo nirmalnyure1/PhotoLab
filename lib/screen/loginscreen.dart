@@ -128,7 +128,6 @@ class _LoginPageState extends State<LoginPage> {
                           ),
                         ]),
                     child: TextField(
-                      
                       controller: passwordController,
                       onChanged: (value) => {password = value},
                       maxLines: 1,
@@ -167,16 +166,17 @@ class _LoginPageState extends State<LoginPage> {
                     },
                     child: Container(
                       decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(15.0),
-                          color: Colors.red,
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.grey.shade300,
-                              offset: Offset(2, 1),
-                              blurRadius: 6.0,
-                              spreadRadius: 5,
-                            ),
-                          ]),
+                        borderRadius: BorderRadius.circular(15.0),
+                        color: Colors.red,
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.grey.shade300,
+                            offset: Offset(2, 1),
+                            blurRadius: 6.0,
+                            spreadRadius: 5,
+                          ),
+                        ],
+                      ),
                       child: Padding(
                         padding: const EdgeInsets.symmetric(
                             horizontal: 120, vertical: 18),
