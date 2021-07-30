@@ -21,7 +21,8 @@ class PostField extends StatelessWidget {
             style: TextStyle(
                 color: Colors.black,
                 fontSize: 23.0,
-                fontWeight: FontWeight.bold),
+                fontWeight: FontWeight.bold,
+                letterSpacing: 2),
           ),
         ),
         Container(
@@ -47,10 +48,9 @@ class PostField extends StatelessWidget {
                               color: Colors.grey.shade300,
                               offset: Offset(2, 1),
                               blurRadius: 6.0,
-                              spreadRadius: 8,
+                              spreadRadius: 3,
                             ),
                           ]),
-                   
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(15.0),
                         child: Image(
@@ -58,6 +58,81 @@ class PostField extends StatelessWidget {
                           width: 300,
                           image: AssetImage(post.imageUrl),
                           fit: BoxFit.cover,
+                        ),
+                      ),
+                    ),
+                    Positioned(
+                      bottom: 5,
+                      left: 5,
+                      right: 5,
+                      child: Container(
+                        height: 100.0,
+                        width: 300,
+                        decoration: BoxDecoration(
+                          color: Colors.white54,
+                          borderRadius: BorderRadius.only(
+                              bottomLeft: Radius.circular(15.0),
+                              bottomRight: Radius.circular(15.0)),
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                post.title,
+                                style: TextStyle(
+                                  fontSize: 24.0,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.black,
+                                ),
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                              Text(
+                                post.location,
+                                style: TextStyle(
+                                  fontSize: 15.0,
+                                  fontWeight: FontWeight.w500,
+                                  color: Colors.black,
+                                ),
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                              Row(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Row(
+                                    children: [
+                                      Icon(
+                                        Icons.favorite,
+                                        color: Colors.red.shade700,
+                                      ),
+                                      Text(
+                                        post.likes.toString(),
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.w600),
+                                      )
+                                    ],
+                                  ),
+                                  Row(
+                                    children: [
+                                      Icon(
+                                        Icons.chat,
+                                        color: Colors.red.shade700,
+                                      ),
+                                      Text(
+                                        post.comments.toString(),
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.w600),
+                                      )
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                     ),
