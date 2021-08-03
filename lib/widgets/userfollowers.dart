@@ -42,7 +42,6 @@ class UserFollowers extends StatelessWidget {
                 },
                 child: Container(
                   decoration: BoxDecoration(
-                      //shape: BoxShape.circle,
                       border: Border.all(
                           color: Theme.of(context).primaryColor, width: 1),
                       borderRadius: BorderRadius.circular(50),

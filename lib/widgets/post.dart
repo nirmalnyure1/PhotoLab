@@ -14,7 +14,8 @@ class PostField extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
-          padding: const EdgeInsets.all(18.0),
+          padding: const EdgeInsets.only(
+              left: 15.0, right: 5.0, bottom: 5.0, top: 5.0),
           child: Text(
             title,
             textAlign: TextAlign.start,
@@ -31,112 +32,133 @@ class PostField extends StatelessWidget {
           width: double.infinity,
           child: PageView.builder(
             physics: BouncingScrollPhysics(),
+            pageSnapping: false,
             controller: pageController,
             itemCount: posts.length,
             itemBuilder: (context, int index) {
               Post post = posts[index];
               return Padding(
                 padding: const EdgeInsets.all(10.0),
-                child: Stack(
-                  children: [
-                    Container(
-                      decoration: BoxDecoration(
-                          color: Colors.red,
-                          borderRadius: BorderRadius.circular(15.0),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.grey.shade300,
-                              offset: Offset(2, 1),
-                              blurRadius: 6.0,
-                              spreadRadius: 3,
-                            ),
-                          ]),
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(15.0),
-                        child: Image(
-                          height: 400,
-                          width: 300,
-                          image: AssetImage(post.imageUrl),
-                          fit: BoxFit.cover,
-                        ),
+                child: AnimatedBuilder(
+                  animation: pageController,
+                  builder: (BuildContext context, Widget? child) {
+                    double value = 1;
+                    if (pageController.position.haveDimensions) {
+                      print(pageController.page);
+                      value = pageController.page - index;
+                      print(value);
+                      value = (1 - (value.abs() * 0.6)).clamp(0.0, 1.0);
+                    }
+
+                    return Center(
+                      child: SizedBox(
+                        height: Curves.easeOut.transform(value) * 350,
+                        width: Curves.easeOut.transform(value) * 300,
+                        child: child,
                       ),
-                    ),
-                    Positioned(
-                      bottom: 5,
-                      left: 5,
-                      right: 5,
-                      child: Container(
-                        height: 100.0,
-                        width: 300,
+                    );
+                  },
+                  child: Stack(
+                    children: [
+                      Container(
                         decoration: BoxDecoration(
-                          color: Colors.white54,
-                          borderRadius: BorderRadius.only(
-                              bottomLeft: Radius.circular(15.0),
-                              bottomRight: Radius.circular(15.0)),
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                post.title,
-                                style: TextStyle(
-                                  fontSize: 24.0,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.black,
-                                ),
-                                overflow: TextOverflow.ellipsis,
+                            color: Colors.red,
+                            borderRadius: BorderRadius.circular(15.0),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.grey.shade300,
+                                offset: Offset(2, 1),
+                                blurRadius: 6.0,
+                                spreadRadius: 3,
                               ),
-                              Text(
-                                post.location,
-                                style: TextStyle(
-                                  fontSize: 15.0,
-                                  fontWeight: FontWeight.w500,
-                                  color: Colors.black,
-                                ),
-                                overflow: TextOverflow.ellipsis,
-                              ),
-                              Row(
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Row(
-                                    children: [
-                                      Icon(
-                                        Icons.favorite,
-                                        color: Colors.red.shade700,
-                                      ),
-                                      Text(
-                                        post.likes.toString(),
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.w600),
-                                      )
-                                    ],
-                                  ),
-                                  Row(
-                                    children: [
-                                      Icon(
-                                        Icons.chat,
-                                        color: Colors.red.shade700,
-                                      ),
-                                      Text(
-                                        post.comments.toString(),
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.w600),
-                                      )
-                                    ],
-                                  ),
-                                ],
-                              ),
-                            ],
+                            ]),
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(15.0),
+                          child: Image(
+                            height: 400,
+                            width: 300,
+                            image: AssetImage(post.imageUrl),
+                            fit: BoxFit.cover,
                           ),
                         ),
                       ),
-                    ),
-                  ],
+                      Positioned(
+                        bottom: 5,
+                        left: 5,
+                        right: 5,
+                        child: Container(
+                          height: 100.0,
+                          width: 300,
+                          decoration: BoxDecoration(
+                            color: Colors.white54,
+                            borderRadius: BorderRadius.only(
+                                bottomLeft: Radius.circular(15.0),
+                                bottomRight: Radius.circular(15.0)),
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  post.title,
+                                  style: TextStyle(
+                                    fontSize: 24.0,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.black,
+                                  ),
+                                  overflow: TextOverflow.ellipsis,
+                                ),
+                                Text(
+                                  post.location,
+                                  style: TextStyle(
+                                    fontSize: 15.0,
+                                    fontWeight: FontWeight.w500,
+                                    color: Colors.black,
+                                  ),
+                                  overflow: TextOverflow.ellipsis,
+                                ),
+                                Row(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Row(
+                                      children: [
+                                        Icon(
+                                          Icons.favorite,
+                                          color: Colors.red.shade700,
+                                        ),
+                                        Text(
+                                          post.likes.toString(),
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.w600),
+                                        )
+                                      ],
+                                    ),
+                                    Row(
+                                      children: [
+                                        Icon(
+                                          Icons.chat,
+                                          color: Colors.red.shade700,
+                                        ),
+                                        Text(
+                                          post.comments.toString(),
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.w600),
+                                        )
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               );
             },

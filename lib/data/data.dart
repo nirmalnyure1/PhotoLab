@@ -67,6 +67,8 @@ final _user1 = User(
   name: '',
   following: 0,
   followers: 0,
+  posts: [],
+  favorites: [],
 );
 final _user2 = User(
   profileImageUrl: 'assets/images/user2.jpg',
@@ -74,6 +76,8 @@ final _user2 = User(
   name: 'nas',
   following: 453,
   followers: 937,
+  posts: [],
+  favorites: [],
 );
 
 final _user3 = User(
@@ -82,6 +86,8 @@ final _user3 = User(
   name: 'nas',
   following: 453,
   followers: 937,
+  posts: [],
+  favorites: [],
 );
 final _user4 = User(
   profileImageUrl: 'assets/images/user4.jpg',
@@ -89,6 +95,8 @@ final _user4 = User(
   name: 'nas',
   following: 453,
   followers: 937,
+  posts: [],
+  favorites: [],
 );
 final _user5 = User(
   profileImageUrl: 'assets/images/user5.jpg',
@@ -96,6 +104,8 @@ final _user5 = User(
   name: 'nas',
   following: 453,
   followers: 937,
+  posts: [],
+  favorites: [],
 );
 final _user6 = User(
   profileImageUrl: 'assets/images/user6.jpg',
@@ -103,6 +113,8 @@ final _user6 = User(
   name: 'nas',
   following: 453,
   followers: 937,
+  posts: [],
+  favorites: [],
 );
 
 final users = [_user1, _user2, _user3, _user4, _user5, _user6];
@@ -112,11 +124,13 @@ final users = [_user1, _user2, _user3, _user4, _user5, _user6];
 
 // Current User
 final User currentUser = User(
-  profileImageUrl: 'assets/images/user.jpg',
-  backgroundImageUrl: 'assets/images/user_background.jpg',
-  name: 'Nirmal',
+  profileImageUrl: 'assets/images/user1.jpg',
+  backgroundImageUrl: 'assets/images/bg.jpg',
+  name: 'Subit',
   following: 453,
   followers: 937,
+  posts: _yourPosts,
+  favorites: _yourFavorites,
 );
 
 final User user1 = User(
@@ -125,4 +139,8 @@ final User user1 = User(
   name: 'avi',
   following: 453,
   followers: 937,
+  posts: [],
+  favorites: [],
 );
+final _yourPosts = [_post1, _post3, _post5];
+final _yourFavorites = [_post1, _post2, _post4];
